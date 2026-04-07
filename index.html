@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ICML Rebuttal Results</title>
+<style>
+    body {
+        margin: 0;
+        padding: 40px 20px;
+        background-color: #ffffff;
+        color: #000000;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+    }
+    h1 {
+        font-size: 1.8rem;
+        font-weight: 500;
+        margin-bottom: 40px;
+        letter-spacing: 0.5px;
+    }
+    details {
+        width: 100%;
+        margin-bottom: 20px;
+        border: 1px solid #eee;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        background: #fff;
+        overflow: hidden;
+    }
+    summary {
+        font-size: 1.3rem;
+        font-weight: 500;
+        padding: 20px;
+        cursor: pointer;
+        background-color: #fafafa;
+        list-style: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        user-select: none;
+    }
+    summary::-webkit-details-marker {
+        display: none;
+    }
+    summary::after {
+        content: '\25BC';
+        font-size: 1rem;
+        color: #888;
+        transition: transform 0.3s ease;
+    }
+    details[open] summary::after {
+        transform: rotate(180deg);
+    }
+    details[open] summary {
+        border-bottom: 1px solid #eee;
+    }
+    .details-content {
+        padding: 40px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    h2 {
+        font-size: 1.1rem;
+        font-weight: 500;
+        margin: 0 0 15px 0;
+        color: #333;
+    }
+    .pipeline-row {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 20px;
+        margin-bottom: 60px;
+    }
+    .stage {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .image-group {
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+    }
+    .asset-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    img {
+        width: 140px;
+        height: 140px;
+        object-fit: cover;
+        object-position: bottom right;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        background-color: #fcfcfc;
+    }
+    .img-full {
+        object-position: center;
+    }
+    .caption {
+        margin-top: 10px;
+        font-size: 0.85rem;
+        color: #666;
+    }
+    .arrow {
+        font-size: 1.5rem;
+        color: #ccc;
+        margin: 0 15px;
+        margin-top: 85px;
+    }
+    .divider {
+        width: 80%;
+        max-width: 800px;
+        height: 1px;
+        background-color: #eee;
+        margin-bottom: 40px;
+    }
+    .baselines-row {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        flex-wrap: wrap;
+    }
+    .baseline {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .baseline video {
+        width: 200px;
+        height: 200px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        background-color: #fcfcfc;
+    }
+    .baseline .caption {
+        font-size: 0.95rem;
+    }
+    
+    .multichair-row {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 40px;
+        margin-bottom: 50px;
+        padding-bottom: 40px;
+        border-bottom: 1px solid #eee;
+        width: 100%;
+    }
+    .multichair-row:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+    .multichair-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .multichair-item img, .multichair-item video {
+        width: 180px;
+        height: 180px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        background-color: #fcfcfc;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    @media (max-width: 900px) {
+        .pipeline-row { flex-direction: column; align-items: center; }
+        .arrow { transform: rotate(90deg); margin: 20px 0; }
+        .baselines-row { flex-wrap: wrap; }
+        .multichair-row { flex-direction: column; gap: 20px; }
+    }
+</style>
+</head>
+<body>
+
+    <h1>ICML Rebuttal Results</h1>
+
+    <!-- Section 1: Robot Wrist -->
+    <details id="robot-wrist" open>
+        <summary>Real Robot Wrist Camera Object Reconstruction</summary>
+        <div class="details-content">
+            <h2>Original sequence</h2>
+            <div class="baseline" style="margin-bottom: 40px;">
+                <video src="assets/pink_bowl_success_h264.mp4" autoplay loop muted playsinline style="width: 600px; height: auto; max-width: 100%;" oncanplay="this.playbackRate = 0.5;"></video>
+            </div>
+            <div class="pipeline-row">
+                <!-- Stage 1 -->
+                <div class="stage">
+                    <h2>1. Input</h2>
+                    <div class="image-group">
+                        <div class="asset-container">
+                            <img src="assets/input_2.jpg" alt="Input RGB">
+                            <div class="caption">RGB</div>
+                        </div>
+                        <div class="asset-container">
+                            <img src="assets/input_2_depth.png" alt="Input Depth">
+                            <div class="caption">Depth</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow">&#10142;</div>
+
+                <!-- Stage 2 -->
+                <div class="stage">
+                    <h2>2. Segmentation</h2>
+                    <div class="image-group">
+                        <div class="asset-container">
+                            <img src="assets/input_2_no_bg_ready.png" alt="Segmented RGB">
+                            <div class="caption">RGB</div>
+                        </div>
+                        <div class="asset-container">
+                            <img src="assets/input_2_depth_ready.png" alt="Segmented Depth">
+                            <div class="caption">Depth</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arrow">&#10142;</div>
+
+                <!-- Stage 3 -->
+                <div class="stage">
+                    <h2>3. Optimization</h2>
+                    <div class="image-group">
+                        <div class="asset-container">
+                            <img src="assets/ours_in_pred.png" alt="Recovered In-Distribution Input">
+                            <div class="caption">Recovered In-Dist. Input</div>
+                        </div>
+                        <div class="asset-container">
+                            <img src="assets/ours_pred.png" alt="Rendered at OOD Pose">
+                            <div class="caption">Rendered at OOD Pose</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <h2>Novel View Synthesis Comparison</h2>
+            <div class="baselines-row">
+                <div class="baseline">
+                    <video src="assets/ours.mp4" autoplay loop muted playsinline></video>
+                    <div class="caption"><strong>Ours</strong></div>
+                </div>
+                <div class="baseline">
+                    <video src="assets/LGM.mp4" autoplay loop muted playsinline></video>
+                    <div class="caption">LGM</div>
+                </div>
+                <div class="baseline">
+                    <video src="assets/stable_fast_3d.mp4" autoplay loop muted playsinline></video>
+                    <div class="caption">Stable Fast 3D</div>
+                </div>
+                <div class="baseline">
+                    <video src="assets/splatter_image.mp4" autoplay loop muted playsinline></video>
+                    <div class="caption">Splatter Image</div>
+                </div>
+            </div>
+        </div>
+    </details>
+
+    <!-- Section 2: Multichair -->
+    <details id="shape-net">
+        <summary>Multi-Object Results on ShapeNet</summary>
+        <div class="details-content">
+            
+            <div class="multichair-row">
+                <div class="multichair-item">
+                    <img src="assets/multichair/cee5c4ec2b284e7317b431cae0dd70ed_input.png" alt="Input">
+                    <div class="caption">Input Image</div>
+                </div>
+                <div class="multichair-item">
+                    <video src="assets/multichair/cee5c4ec2b284e7317b431cae0dd70ed_ours.mp4" autoplay loop muted playsinline></video>
+                    <div class="caption"><strong>Ours (Side-Top)</strong></div>
+                </div>
+                <div class="multichair-item">
+                    <video src="assets/multichair/cee5c4ec2b284e7317b431cae0dd70ed_gt.mp4" autoplay loop muted playsinline></video>
+                    <div class="caption">Ground Truth (Side-Top)</div>
+                </div>
+            </div>
+
+            <div class="multichair-row">
+                <div class="multichair-item">
+                    <img src="assets/multichair/ea02e94e39a2fd3922963ea1e168015d_input.png" alt="Input">
+                    <div class="caption">Input Image</div>
+                </div>
+                <div class="multichair-item">
+                    <video src="assets/multichair/ea02e94e39a2fd3922963ea1e168015d_ours.mp4" autoplay loop muted playsinline></video>
+                    <div class="caption"><strong>Ours (Side-Top)</strong></div>
+                </div>
+                <div class="multichair-item">
+                    <video src="assets/multichair/ea02e94e39a2fd3922963ea1e168015d_gt.mp4" autoplay loop muted playsinline></video>
+                    <div class="caption">Ground Truth (Side-Top)</div>
+                </div>
+            </div>
+
+            <div class="multichair-row">
+                <div class="multichair-item">
+                    <img src="assets/multichair/d2b334ad08ac9857c3cf9ae716575390_input.png" alt="Input">
+                    <div class="caption">Input Image</div>
+                </div>
+                <div class="multichair-item">
+                    <video src="assets/multichair/d2b334ad08ac9857c3cf9ae716575390_ours.mp4" autoplay loop muted playsinline></video>
+                    <div class="caption"><strong>Ours (Side-Top)</strong></div>
+                </div>
+                <div class="multichair-item">
+                    <video src="assets/multichair/d2b334ad08ac9857c3cf9ae716575390_gt.mp4" autoplay loop muted playsinline></video>
+                    <div class="caption">Ground Truth (Side-Top)</div>
+                </div>
+            </div>
+
+        </div>
+    </details>
+
+</body>
+</html>
